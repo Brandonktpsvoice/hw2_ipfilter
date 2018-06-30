@@ -16,10 +16,10 @@ set(SOURCES src/main.cpp)
 
 add_executable(ip_filter ${SOURCES})
 
-add_subdirectory(lib)
 include_directories(lib)
-
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
+
+add_subdirectory(lib)
 
 target_link_libraries(ip_filter prj_lib)
 

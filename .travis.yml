@@ -1,0 +1,27 @@
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+
+before_script:
+  - sudo apt-get install libgtest-dev cmake -y
+  - cd /usr/src/gtest
+  - sudo CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7 cmake .
+  - sudo make
+  - sudo cp *.a /usr/lib
+  - cd "${TRAVIS_BUILD_DIR}"
+
+script:
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7 cmake .
+  - cmake --build .
+  - cmake --build . --target test
+  - cmake --build . --target package
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+  - curl -T helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -upointer22:$BINTRAY_API_KEY "https://api.bintray.com/content/pointer22/HelloWorld/HelloWorld_deb/$TRAVIS_BUILD_NUMBER/helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"

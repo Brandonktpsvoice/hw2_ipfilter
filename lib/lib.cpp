@@ -1,7 +1,6 @@
-#include <iostream>
 #include "lib.h"
 
-int version()
+int hw::version()
 {
 	return PROJECT_VERSION_PATCH;
 }

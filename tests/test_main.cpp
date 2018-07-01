@@ -3,7 +3,7 @@
 
 TEST (SquareRootTest, PositiveNos)
 { 
-    EXPECT_EQ (version(), PROJECT_VERSION_PATCH);
+    EXPECT_EQ (hw::version(), PROJECT_VERSION_PATCH);
 }
 
 int main(int argc, char **argv)
